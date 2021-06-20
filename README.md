@@ -1,4 +1,4 @@
-# sns
+# Prehack SNS
 
 > Nuxt.js project
 
