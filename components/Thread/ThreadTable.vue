@@ -12,7 +12,7 @@
         class="circular"
         size="270"
         indeterminate
-        color="primary"
+        color="white"
       >
         GET => Kashiwa Onigiri 🍙
       </v-progress-circular>

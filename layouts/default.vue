@@ -44,7 +44,7 @@ html {
 }
 
 #app {
-  background-color: lightgoldenrodyellow;
+  background-color: rgb(32, 36, 40);
   max-height: 100vh;
   font-family: "cyrillic";
   overflow: hidden;

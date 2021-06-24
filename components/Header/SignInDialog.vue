@@ -1,59 +1,61 @@
 <template>
-  <v-card elevation="2" width="20vw">
-    <v-card-text>
+  <v-menu
+    v-model="menu"
+    transition="slide-y-transition"
+    :close-on-content-click="false"
+    :nudge-width="200"
+    offset-x
+  >
+    <template v-slot:activator="{ on, attrs }">
+      <v-btn text color="primary" v-bind="attrs" v-on="on">
+        <v-icon left>mdi-login</v-icon>
+        ログイン
+      </v-btn>
+    </template>
+    <v-card elevation="2">
       <v-form v-model="valid">
-        <v-row class="flex-column">
-          <v-col>
-            <div class="text-h6">
-              ログイン・ログアウト
-            </div>
-          </v-col>
-          <v-col cols="auto">
-            <v-text-field
-              v-model="email"
-              :rules="emailRules"
-              label="メールアドレス"
-              required
-              append-icon="mdi-email"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="auto">
-            <v-text-field
-              v-model="password"
-              :rules="passwordRules"
-              label="パスワード"
-              required
-              append-icon="mdi-key"
-              type="password"
-            ></v-text-field>
-          </v-col>
-          <v-col>
-            <v-btn
-              elevation="2"
-              @click="signin()"
-              color="success"
-              :loading="btn_loading"
-            >
-              ログイン
-            </v-btn>
-          </v-col>
-          <v-col>
-            <v-btn elevation="2" @click="logOut()" color="error" v-if="isLogin">
-              ログアウト
-            </v-btn>
-          </v-col>
-          <v-col>
-            <div v-if="error_flag" class="wrong_text">
-              エラー：{{ error_text }}
-            </div>
-            <div v-if="success_flag" class="success_text">
-              {{ msg }}に成功しました
-            </div>
-          </v-col>
-        </v-row>
+        <v-card-text>
+          <v-text-field
+            v-model="email"
+            :rules="emailRules"
+            label="メールアドレス"
+            clearable
+            required
+            append-icon="mdi-email"
+          ></v-text-field>
+        </v-card-text>
+        <v-card-text>
+          <v-text-field
+            v-model="password"
+            :rules="passwordRules"
+            label="パスワード"
+            clearable
+            required
+            append-icon="mdi-key"
+            type="password"
+          ></v-text-field>
+        </v-card-text>
+        <v-card-actions class="action">
+          <v-btn
+            elevation="2"
+            @click="signin()"
+            color="success"
+            :loading="btn_loading"
+          >
+            ログイン
+          </v-btn>
+        </v-card-actions>
+        <v-card-text>
+          <div v-if="error_flag" class="wrong_text">
+            エラー：{{ error_text }}
+          </div>
+          <div v-if="success_flag" class="success_text">
+            {{ msg }}に成功しました
+          </div>
+        </v-card-text>
       </v-form>
-    </v-card-text>
-  </v-card>
+    </v-card>
+  </v-menu>
 </template>
 
 <script>
@@ -61,6 +63,7 @@ import axios from "axios";
 
 export default {
   data: () => ({
+    menu: false,
     valid: false,
     email: "",
     emailRules: [
@@ -120,6 +123,9 @@ export default {
 </script>
 
 <style scoped>
+.action {
+  justify-content: center;
+}
 .v-card {
   margin: auto;
 }
