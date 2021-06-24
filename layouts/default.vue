@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <v-vanta effect="rings" :options="options" />
     <Header />
     <v-main>
       <v-container>
@@ -8,6 +9,27 @@
     </v-main>
   </v-app>
 </template>
+
+<script>
+import VVanta from "../node_modules/vue-vanta/src/Vanta.vue";
+
+export default {
+  components: { VVanta },
+  data() {
+    return {
+      options: {
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: true,
+        minHeight: 977.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0
+      }
+    };
+  }
+};
+</script>
 
 <style>
 html {
@@ -30,5 +52,7 @@ html {
 
 .container {
   min-height: 100%;
+  display: flex;
+  align-items: center;
 }
 </style>

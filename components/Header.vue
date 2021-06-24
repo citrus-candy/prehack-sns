@@ -24,9 +24,7 @@ export default {
 </script>
 
 <style scoped>
-.layout {
-  position: absolute;
-  top: 10px;
-  left: 20px;
+.v-app-bar {
+  opacity: 0.7;
 }
 </style>
