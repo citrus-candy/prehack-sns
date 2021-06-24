@@ -1,9 +1,11 @@
 <template>
   <v-app>
+    <Header />
     <v-main>
-      <nuxt />
+      <v-container>
+        <nuxt />
+      </v-container>
     </v-main>
-    <Footer />
   </v-app>
 </template>
 
@@ -29,5 +31,9 @@ html {
 #app {
   background-color: lightgoldenrodyellow;
   max-height: 100vh;
+}
+
+.container {
+  min-height: 100%;
 }
 </style>
