@@ -21,7 +21,16 @@ module.exports = {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
-    "@nuxtjs/vuetify"
+    "@nuxtjs/vuetify",
+    [
+      "@nuxtjs/google-fonts",
+      {
+        families: { Inter: true },
+        display: "block",
+        download: true,
+        inject: true
+      }
+    ]
   ],
   components: true,
   modules: ["@nuxtjs/axios"],
