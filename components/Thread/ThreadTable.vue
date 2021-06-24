@@ -8,7 +8,14 @@
       />
     </v-col>
     <v-col v-show="progress">
-      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+      <v-progress-circular
+        class="circular"
+        size="270"
+        indeterminate
+        color="primary"
+      >
+        GET => Kashiwa Onigiri 🍙
+      </v-progress-circular>
     </v-col>
   </v-row>
 </template>
@@ -47,6 +54,7 @@ export default {
   max-width: max-content;
   margin: auto;
 }
-.col {
+.circular {
+  width: fit-content;
 }
 </style>
