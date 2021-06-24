@@ -55,4 +55,8 @@ html {
   display: flex;
   align-items: center;
 }
+
+.vanta-canvas {
+  height: 100vh !important;
+}
 </style>
