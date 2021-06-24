@@ -31,8 +31,8 @@ export default {
     imgArrayLength: 143
   }),
   created() {
-    for (let i = 0; i < this.imgArrayLength; i++) {
-      this.imgArray.push(i + 1);
+    for (let i = 1; i < this.imgArrayLength; i++) {
+      this.imgArray.push(i);
     }
     let imgNumber = Math.floor(Math.random() * this.imgArray.length);
     this.imgUrl =
