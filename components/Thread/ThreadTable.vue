@@ -36,7 +36,7 @@ export default {
     thread_names: [],
     progress: true
   }),
-  created() {
+  mounted() {
     this.listThread();
   },
   methods: {
