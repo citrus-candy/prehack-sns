@@ -1,7 +1,7 @@
 <template>
   <v-hover v-slot="{ hover }">
     <v-card
-      :to="thread_key"
+      @click="setThreadKey()"
       :elevation="hover ? 12 : 2"
       :class="{ 'on-hover': hover }"
       nuxt
@@ -30,6 +30,12 @@ export default {
     imgArray: [],
     imgArrayLength: 143
   }),
+  methods: {
+    setThreadKey() {
+      console.log("ThreadKey:" + this.thread_key);
+      this.$store.commit("setThreadKey", this.thread_key);
+    }
+  },
   created() {
     for (let i = 1; i < this.imgArrayLength; i++) {
       this.imgArray.push(i);

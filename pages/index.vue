@@ -1,19 +1,23 @@
 <template>
   <v-row class="flex-column">
-    <!-- <v-col>
-       <v-img
-        class="img"
-        src="https://pbs.twimg.com/media/E38dbTeVoAEggAY?format=jpg&name=large"
-        max-width="54vw"
-      ></v-img> 
-    </v-col> -->
-    <v-col>
+    <v-col v-if="threadKey == ''">
       <ThreadTable />
+    </v-col>
+    <v-col v-else>
+      <PostsList />
     </v-col>
   </v-row>
 </template>
 
-<script></script>
+<script>
+export default {
+  computed: {
+    threadKey() {
+      return this.$store.state.threadKey;
+    }
+  }
+};
+</script>
 
 <style scoped>
 .img {

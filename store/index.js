@@ -1,6 +1,7 @@
 export const state = () => ({
   isLogin: false,
-  token: ""
+  token: "",
+  threadKey: ""
 });
 
 export const mutations = {
@@ -9,5 +10,8 @@ export const mutations = {
   },
   setToken(state, token) {
     state.token = token;
+  },
+  setThreadKey(state, threadKey) {
+    state.threadKey = threadKey;
   }
 };

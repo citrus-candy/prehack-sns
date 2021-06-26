@@ -37,6 +37,7 @@ export default {
     progress: true
   }),
   mounted() {
+    this.$store.commit("setThreadKey", "");
     this.listThread();
   },
   methods: {
