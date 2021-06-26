@@ -14,6 +14,13 @@
             <v-divider></v-divider>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item v-show="progress" class="circular">
+          <v-list-item-content>
+            <v-progress-circular size="270" indeterminate color="white">
+              GET => Kashiwa Onigiri 🍙
+            </v-progress-circular>
+          </v-list-item-content>
+        </v-list-item>
       </v-card>
     </v-col>
     <div class="btnContainer">
@@ -47,6 +54,7 @@ export default {
   methods: {
     async listPosts() {
       this.contents = [];
+      this.progress = true;
       console.log("storeThreadKey:" + this.$store.state.threadKey);
       let url =
         "https://t9f823.deta.dev/api/v1/threads/" +
@@ -69,6 +77,7 @@ export default {
               this.dateFormat(date, "YYYY/MM/DD HH:MM:SS")
             ]);
           });
+          this.progress = false;
           console.log(this.contents);
         })
         .catch(error => {
@@ -130,6 +139,9 @@ export default {
 }
 .v-list-item__title {
   display: flex;
+}
+.circular {
+  height: inherit;
 }
 .itemDate {
   text-align: right;

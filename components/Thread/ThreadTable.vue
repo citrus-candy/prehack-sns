@@ -22,7 +22,7 @@
       <div class="bg" v-show="progress"></div>
     </transition>
     <div class="btnContainer">
-      <v-btn fab color="primary" @click="listPosts()">
+      <v-btn fab color="primary" @click="listThread()">
         <v-icon>mdi-sync</v-icon>
       </v-btn>
       <v-btn fab color="red">
