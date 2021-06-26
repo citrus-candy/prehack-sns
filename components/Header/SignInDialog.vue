@@ -19,7 +19,6 @@
             v-model="email"
             :rules="emailRules"
             label="メールアドレス"
-            clearable
             required
             append-icon="mdi-email"
           ></v-text-field>
@@ -29,7 +28,6 @@
             v-model="password"
             :rules="passwordRules"
             label="パスワード"
-            clearable
             required
             append-icon="mdi-key"
             type="password"
@@ -48,9 +46,6 @@
         <v-card-text>
           <div v-if="error_flag" class="wrong_text">
             エラー：{{ error_text }}
-          </div>
-          <div v-if="success_flag" class="success_text">
-            {{ msg }}に成功しました
           </div>
         </v-card-text>
       </v-form>
@@ -73,9 +68,7 @@ export default {
     password: "",
     passwordRules: [v => !!v || "パスワードは必須です"],
     error_flag: false,
-    success_flag: false,
-    btn_loading: false,
-    msg: ""
+    btn_loading: false
   }),
   methods: {
     // testdata => email: hogehoge@fuga.com passeword: hogehogefuga
@@ -83,7 +76,6 @@ export default {
       let url = "https://t9f823.deta.dev/api/v1/auth/signin";
       this.btn_loading = true;
       this.error_flag = false;
-      this.success_flag = false;
       axios
         .post(url, {
           email: this.email,
@@ -91,9 +83,8 @@ export default {
         })
         .then(response => {
           console.log(response.data);
-          this.success_flag = true;
           this.btn_loading = false;
-          this.msg = "ログイン";
+          this.menu = false;
           this.$store.commit("setIsLogin", true);
           this.$store.commit("setToken", response.data.jwt);
         })
@@ -107,8 +98,6 @@ export default {
     logOut() {
       this.$store.commit("setIsLogin", false);
       this.$store.commit("setToken", "");
-      this.msg = "ログアウト";
-      this.success_flag = true;
     }
   },
   computed: {

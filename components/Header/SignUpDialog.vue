@@ -19,7 +19,6 @@
             v-model="name"
             :rules="nameRules"
             label="ユーザー名"
-            clearable
             required
             append-icon="mdi-pencil"
           ></v-text-field>
@@ -29,7 +28,6 @@
             v-model="email"
             :rules="emailRules"
             label="メールアドレス"
-            clearable
             required
             append-icon="mdi-email"
           ></v-text-field>
@@ -39,7 +37,6 @@
             v-model="password"
             :rules="passwordRules"
             label="パスワード"
-            clearable
             required
             append-icon="mdi-key"
             type="password"
