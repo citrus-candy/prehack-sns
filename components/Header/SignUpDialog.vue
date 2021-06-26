@@ -7,10 +7,13 @@
     offset-x
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-btn text color="primary" v-bind="attrs" v-on="on">
+      <v-btn text color="primary" v-bind="attrs" v-on="on" v-show="!isLogin">
         <v-icon left>mdi-account-plus</v-icon>
         ユーザー登録
       </v-btn>
+      <v-snackbar class="snack" v-model="snackSignup" absolute right>
+        ユーザー登録に成功しました
+      </v-snackbar>
     </template>
     <v-card elevation="2">
       <v-form v-model="valid">
@@ -55,16 +58,14 @@
             elevation="2"
             @click="signup()"
             color="primary"
-            :loading="btn_loading"
+            :loading="btnLoading"
           >
             サインアップ
           </v-btn>
         </v-card-actions>
         <v-card-text>
-          <div v-if="error_flag" class="wrong_text">
-            エラー：{{ error_text }}
-          </div>
-          <div v-if="success_flag" class="success_text">
+          <div v-if="errorFlag" class="wrong_text">エラー：{{ errorText }}</div>
+          <div v-if="successFlag" class="success_text">
             ユーザー登録に成功しました
           </div>
         </v-card-text>
@@ -90,18 +91,19 @@ export default {
     password: "",
     passwordRules: [v => !!v || "パスワードは必須です"],
     description: "",
-    error_flag: false,
-    error_text: "",
-    success_flag: false,
-    success_text: "",
-    btn_loading: false
+    errorFlag: false,
+    errorText: "",
+    successFlag: false,
+    successText: "",
+    btnLoading: false,
+    snackSignup: false
   }),
   methods: {
     async signup() {
       let url = "https://t9f823.deta.dev/api/v1/auth/signup";
-      this.btn_loading = true;
-      this.success_flag = false;
-      this.error_flag = false;
+      this.btnLoading = true;
+      this.successFlag = false;
+      this.errorFlag = false;
       axios
         .post(url, {
           name: this.name,
@@ -111,15 +113,21 @@ export default {
         })
         .then(response => {
           console.log(response.status);
-          this.success_flag = true;
-          this.btn_loading = false;
+          this.successFlag = true;
+          this.btnLoading = false;
+          this.snackSignup = true;
         })
         .catch(error => {
           console.log(error.response);
-          this.error_text = error.response.data.detail;
-          this.error_flag = true;
-          this.btn_loading = false;
+          this.errorText = error.response.data.detail;
+          this.errorFlag = true;
+          this.btnLoading = false;
         });
+    }
+  },
+  computed: {
+    isLogin() {
+      return this.$store.state.isLogin;
     }
   }
 };
@@ -137,5 +145,8 @@ export default {
 }
 .success_text {
   color: green;
+}
+.snack {
+  top: 66px;
 }
 </style>

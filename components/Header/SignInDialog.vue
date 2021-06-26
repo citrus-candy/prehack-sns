@@ -7,11 +7,22 @@
     offset-x
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-btn text color="primary" v-bind="attrs" v-on="on">
+      <v-btn v-if="!isLogin" text color="primary" v-bind="attrs" v-on="on">
         <v-icon left>mdi-login</v-icon>
         ログイン
       </v-btn>
+      <v-btn v-else text color="primary" @click="logOut()">
+        <v-icon left>mdi-logout</v-icon>
+        ログアウト
+      </v-btn>
+      <v-snackbar class="snack" v-model="snackLogin" absolute right>
+        ログインに成功しました
+      </v-snackbar>
+      <v-snackbar class="snack" v-model="snackLogout" absolute right>
+        ログアウトに成功しました
+      </v-snackbar>
     </template>
+
     <v-card elevation="2">
       <v-form v-model="valid">
         <v-card-text>
@@ -38,15 +49,13 @@
             elevation="2"
             @click="signin()"
             color="success"
-            :loading="btn_loading"
+            :loading="btnLoading"
           >
             ログイン
           </v-btn>
         </v-card-actions>
         <v-card-text>
-          <div v-if="error_flag" class="wrong_text">
-            エラー：{{ error_text }}
-          </div>
+          <div v-if="errorFlag" class="wrong_text">エラー：{{ errorText }}</div>
         </v-card-text>
       </v-form>
     </v-card>
@@ -67,15 +76,18 @@ export default {
     ],
     password: "",
     passwordRules: [v => !!v || "パスワードは必須です"],
-    error_flag: false,
-    btn_loading: false
+    errorFlag: false,
+    errorText: "",
+    btnLoading: false,
+    snackLogin: false,
+    snackLogout: false
   }),
   methods: {
     // testdata => email: hogehoge@fuga.com passeword: hogehogefuga
     async signin() {
       let url = "https://t9f823.deta.dev/api/v1/auth/signin";
-      this.btn_loading = true;
-      this.error_flag = false;
+      this.btnLoading = true;
+      this.errorFlag = false;
       axios
         .post(url, {
           email: this.email,
@@ -83,29 +95,28 @@ export default {
         })
         .then(response => {
           console.log(response.data);
-          this.btn_loading = false;
+          this.btnLoading = false;
           this.menu = false;
+          this.snackLogin = true;
           this.$store.commit("setIsLogin", true);
           this.$store.commit("setToken", response.data.jwt);
         })
         .catch(error => {
           console.log(error.response);
-          this.error_text = error.response.data.detail;
-          this.error_flag = true;
+          this.errorText = error.response.data.detail;
+          this.errorFlag = true;
           this.btn_loading = false;
         });
     },
     logOut() {
       this.$store.commit("setIsLogin", false);
       this.$store.commit("setToken", "");
+      this.snackLogout = true;
     }
   },
   computed: {
     isLogin() {
       return this.$store.state.isLogin;
-    },
-    token() {
-      return this.$store.state.token;
     }
   }
 };
@@ -123,5 +134,8 @@ export default {
 }
 .success_text {
   color: green;
+}
+.snack {
+  top: 66px;
 }
 </style>
