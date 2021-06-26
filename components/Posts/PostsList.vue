@@ -1,18 +1,33 @@
 <template>
-  <v-card height="75vh" width="50vw">
-    <v-list-item v-for="content in contents" :key="content.key">
-      <v-list-item-content>
-        <v-list-item-subtitle>{{ content[0] }}</v-list-item-subtitle>
-        <v-list-item-title>
-          <div>{{ content[1] }}</div>
-          <v-list-item-subtitle class="itemDate">
-            {{ content[2] }}
-          </v-list-item-subtitle>
-        </v-list-item-title>
-        <v-divider></v-divider>
-      </v-list-item-content>
-    </v-list-item>
-  </v-card>
+  <v-row>
+    <v-col>
+      <v-card height="75vh" width="50vw" dark>
+        <v-list-item v-for="content in contents" :key="content.key">
+          <v-list-item-content>
+            <v-list-item-subtitle>{{ content[0] }}</v-list-item-subtitle>
+            <v-list-item-title>
+              <div>{{ content[1] }}</div>
+              <v-list-item-subtitle class="itemDate">
+                {{ content[2] }}
+              </v-list-item-subtitle>
+            </v-list-item-title>
+            <v-divider></v-divider>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
+    </v-col>
+    <div class="btnContainer">
+      <v-btn fab color="cyan" @click="setThreadKey()">
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
+      <v-btn fab color="primary" @click="listPosts()">
+        <v-icon>mdi-sync</v-icon>
+      </v-btn>
+      <v-btn fab color="red">
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+    </div>
+  </v-row>
 </template>
 
 <script>
@@ -82,6 +97,10 @@ export default {
           console.log(error.response);
         });
     },
+    setThreadKey() {
+      console.log("ThreadKey:" + this.thread_key);
+      this.$store.commit("setThreadKey", "");
+    },
     dateFormat(date, format) {
       format = format.replace(/YYYY/, date.getFullYear());
       format = format.replace(/MM/, date.getMonth() + 1);
@@ -114,6 +133,19 @@ export default {
 }
 .itemDate {
   text-align: right;
+}
+.btnContainer {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+.v-btn {
+  margin: 0px 5px;
+  opacity: 0.7;
+  transition-property: opacity;
+}
+.v-btn:hover {
+  opacity: 0.9;
 }
 ::-webkit-scrollbar {
   width: 10px;

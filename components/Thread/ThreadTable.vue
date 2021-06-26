@@ -21,9 +21,14 @@
     <transition name="fade">
       <div class="bg" v-show="progress"></div>
     </transition>
-    <v-btn fab color="primary" @click="listThread()">
-      <v-icon>mdi-sync</v-icon>
-    </v-btn>
+    <div class="btnContainer">
+      <v-btn fab color="primary" @click="listPosts()">
+        <v-icon>mdi-sync</v-icon>
+      </v-btn>
+      <v-btn fab color="red">
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+    </div>
   </v-row>
 </template>
 
@@ -82,10 +87,13 @@ export default {
 .fade-leave-to {
   opacity: 0;
 }
-.v-btn {
+.btnContainer {
   position: absolute;
   top: 30px;
   left: 30px;
+}
+.v-btn {
+  margin: 0px 5px;
   opacity: 0.7;
   transition-property: opacity;
 }
