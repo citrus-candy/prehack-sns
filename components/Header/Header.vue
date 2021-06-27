@@ -2,10 +2,6 @@
   <v-app-bar app v-show="loading">
     <v-toolbar-title>Prehack SNS</v-toolbar-title>
     <v-spacer></v-spacer>
-    <v-btn text color="primary" href="/" nuxt>
-      <v-icon left>mdi-home</v-icon>
-      ホーム
-    </v-btn>
     <sign-in-dialog />
     <sign-up-dialog />
   </v-app-bar>
