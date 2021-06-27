@@ -43,7 +43,7 @@ export default {
     let imgNumber = Math.floor(Math.random() * this.imgArray.length);
     this.imgUrl =
       "https://www.beiz.jp/images_P/pastel/pastel_00" +
-      ("000" + imgNumber).slice(-3) +
+      ("00" + imgNumber).slice(-3) +
       ".jpg";
   }
 };
