@@ -65,9 +65,6 @@
         </v-card-actions>
         <v-card-text>
           <div v-if="errorFlag" class="wrong_text">エラー：{{ errorText }}</div>
-          <div v-if="successFlag" class="success_text">
-            ユーザー登録に成功しました
-          </div>
         </v-card-text>
       </v-form>
     </v-card>

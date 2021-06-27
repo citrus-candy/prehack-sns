@@ -25,17 +25,17 @@
       <v-btn fab color="primary" @click="listThread()">
         <v-icon>mdi-sync</v-icon>
       </v-btn>
-      <v-btn fab color="red">
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
+      <create-thread-dialog @list-thread="listThread" />
     </div>
   </v-row>
 </template>
 
 <script>
 import axios from "axios";
+import CreateThreadDialog from "./CreateThreadDialog.vue";
 
 export default {
+  components: { CreateThreadDialog },
   data: () => ({
     results: [],
     thread_names: [],

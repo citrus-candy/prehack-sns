@@ -105,7 +105,7 @@ export default {
           console.log(error.response);
           this.errorText = error.response.data.detail;
           this.errorFlag = true;
-          this.btn_loading = false;
+          this.btnLoading = false;
         });
     },
     logOut() {
