@@ -30,17 +30,17 @@
       <v-btn fab color="primary" @click="listPosts()">
         <v-icon>mdi-sync</v-icon>
       </v-btn>
-      <v-btn fab color="red">
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
+      <create-post-dialog @list-posts="listPosts" />
     </div>
   </v-row>
 </template>
 
 <script>
 import axios from "axios";
+import CreatePostDialog from "./CreatePostDialog.vue";
 
 export default {
+  components: { CreatePostDialog },
   data: () => ({
     contents: [],
     dialog: false,

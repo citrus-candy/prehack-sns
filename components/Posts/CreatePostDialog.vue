@@ -12,28 +12,33 @@
       <v-btn fab color="red" v-bind="attrs" v-on="on" v-show="isLogin">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
-      <v-snackbar class="snack" v-model="snackCreateThread" absolute left>
-        スレッドを作成しました
+      <v-snackbar
+        max-width="220px"
+        min-width="180px"
+        v-model="snackCreateThread"
+        absolute
+        left
+      >
+        投稿しました
       </v-snackbar>
     </template>
     <v-card elevation="2">
       <v-form v-model="valid">
         <v-card-text>
-          <v-text-field
-            v-model="name"
-            label="スレッド名"
+          <v-textarea
+            v-model="content"
+            label="いまなにしてるん？"
             required
-            append-icon="mdi-pencil"
-          ></v-text-field>
+          ></v-textarea>
         </v-card-text>
         <v-card-actions class="action">
           <v-btn
             elevation="2"
-            @click="createThread()"
+            @click="createPost()"
             color="primary"
             :loading="btnLoading"
           >
-            作成
+            投稿
           </v-btn>
         </v-card-actions>
         <v-card-text v-show="errorFlag">
@@ -51,16 +56,15 @@ export default {
   data: () => ({
     menu: false,
     valid: false,
-    name: "",
+    content: "",
     errorFlag: false,
     errorText: "",
     btnLoading: false,
     snackCreateThread: false
   }),
   methods: {
-    // testdata => email: hogehoge@fuga.com passeword: hogehogefuga
-    async createThread() {
-      let url = "https://t9f823.deta.dev/api/v1/threads";
+    async createPost() {
+      let url = "https://t9f823.deta.dev/api/v1/posts";
       let Authorization = `Bearer ${this.$store.state.token}`;
       this.btnLoading = true;
       this.errorFlag = false;
@@ -68,7 +72,8 @@ export default {
         .post(
           url,
           {
-            name: this.name
+            thread_key: this.$store.state.threadKey,
+            content: this.content
           },
           {
             headers: { "jwt-token": Authorization }
@@ -79,7 +84,7 @@ export default {
           this.btnLoading = false;
           this.menu = false;
           this.snackCreateThread = true;
-          this.$emit("list-thread");
+          this.$emit("list-posts");
         })
         .catch(error => {
           console.log(error.response);
@@ -107,7 +112,7 @@ export default {
 .wrong_text {
   color: red;
 }
-.snack {
+.v-snack {
   top: 66px;
 }
 </style>
