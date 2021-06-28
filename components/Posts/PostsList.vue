@@ -78,7 +78,7 @@ export default {
         "https://t9f823.deta.dev/api/v1/threads/" +
         this.$store.state.threadKey +
         "/posts";
-      axios
+      await axios
         .get(url, {
           params: {
             limit: 99,
@@ -108,7 +108,7 @@ export default {
     async createPosts() {
       let url = "https://t9f823.deta.dev/api/v1/posts/";
       let Authorization = `Bearer ${this.$store.state.token}`;
-      axios
+      await axios
         .post(
           url,
           {
@@ -132,7 +132,7 @@ export default {
       let Authorization = `Bearer ${this.$store.state.token}`;
       this.btnLoading = true;
       // console.log(post_key, Authorization);
-      axios
+      await axios
         .delete(url, {
           data: {
             post_key: post_key

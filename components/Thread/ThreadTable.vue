@@ -49,7 +49,7 @@ export default {
     async listThread() {
       let url = "https://t9f823.deta.dev/api/v1/threads";
       this.progress = true;
-      axios
+      await axios
         .get(url)
         .then(response => {
           this.results = response.data;

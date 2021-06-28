@@ -68,7 +68,7 @@ export default {
       let Authorization = `Bearer ${this.$store.state.token}`;
       this.btnLoading = true;
       this.errorFlag = false;
-      axios
+      await axios
         .post(
           url,
           {

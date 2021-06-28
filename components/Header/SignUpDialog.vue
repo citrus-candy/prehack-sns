@@ -101,7 +101,7 @@ export default {
       this.btnLoading = true;
       this.successFlag = false;
       this.errorFlag = false;
-      axios
+      await axios
         .post(url, {
           name: this.name,
           email: this.email,

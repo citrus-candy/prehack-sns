@@ -91,7 +91,7 @@ export default {
       let url = "https://t9f823.deta.dev/api/v1/auth/signin";
       this.btnLoading = true;
       this.errorFlag = false;
-      axios
+      await axios
         .post(url, {
           email: this.email,
           password: this.password
@@ -115,7 +115,7 @@ export default {
     async userInfo() {
       let url = "https://t9f823.deta.dev/api/v1/users/me";
       let Authorization = `Bearer ${this.$store.state.token}`;
-      axios
+      await axios
         .get(url, {
           headers: { "jwt-token": Authorization }
         })
