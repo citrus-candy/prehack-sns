@@ -15,6 +15,9 @@
         <v-icon left>mdi-logout</v-icon>
         ログアウト
       </v-btn>
+      <v-btn class="userName" text>
+        {{ userName }}
+      </v-btn>
       <v-snackbar class="snack" v-model="snackLogin" absolute right>
         ログインに成功しました
       </v-snackbar>
@@ -100,12 +103,29 @@ export default {
           this.snackLogin = true;
           this.$store.commit("setIsLogin", true);
           this.$store.commit("setToken", response.data.jwt);
+          this.userInfo();
         })
         .catch(error => {
           console.log(error.response);
           this.errorText = error.response.data.detail;
           this.errorFlag = true;
           this.btnLoading = false;
+        });
+    },
+    async userInfo() {
+      let url = "https://t9f823.deta.dev/api/v1/users/me";
+      let Authorization = `Bearer ${this.$store.state.token}`;
+      axios
+        .get(url, {
+          headers: { "jwt-token": Authorization }
+        })
+        .then(response => {
+          console.log(response.data);
+          this.$store.commit("setUserKey", response.data.key);
+          this.$store.commit("setUserName", response.data.name);
+        })
+        .catch(error => {
+          console.log(error.response);
         });
     },
     logOut() {
@@ -117,6 +137,9 @@ export default {
   computed: {
     isLogin() {
       return this.$store.state.isLogin;
+    },
+    userName() {
+      return this.$store.state.userName;
     }
   }
 };
@@ -128,6 +151,10 @@ export default {
 }
 .v-card {
   margin: auto;
+}
+.userName {
+  color: black !important;
+  pointer-events: none;
 }
 .wrong_text {
   color: red;
