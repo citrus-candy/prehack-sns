@@ -75,7 +75,7 @@ export default {
           }
         )
         .then(response => {
-          console.log(response.data);
+          // console.log(response.data);
           this.btnLoading = false;
           this.menu = false;
           this.snackCreateThread = true;

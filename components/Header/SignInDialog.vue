@@ -97,7 +97,7 @@ export default {
           password: this.password
         })
         .then(response => {
-          console.log(response.data);
+          // console.log(response.data);
           this.btnLoading = false;
           this.menu = false;
           this.snackLogin = true;
@@ -120,7 +120,7 @@ export default {
           headers: { "jwt-token": Authorization }
         })
         .then(response => {
-          console.log(response.data);
+          // console.log(response.data);
           this.$store.commit("setUserKey", response.data.key);
           this.$store.commit("setUserName", response.data.name);
         })

@@ -32,7 +32,7 @@ export default {
   }),
   methods: {
     setThreadKey() {
-      console.log("ThreadKey:" + this.thread_key);
+      // console.log("ThreadKey:" + this.thread_key);
       this.$store.commit("setThreadKey", this.thread_key);
     }
   },

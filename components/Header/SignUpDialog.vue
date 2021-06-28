@@ -109,7 +109,7 @@ export default {
           description: this.description
         })
         .then(response => {
-          console.log(response.status);
+          // console.log(response.status);
           this.successFlag = true;
           this.btnLoading = false;
           this.snackSignup = true;

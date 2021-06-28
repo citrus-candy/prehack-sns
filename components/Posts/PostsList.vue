@@ -73,7 +73,7 @@ export default {
     async listPosts() {
       this.contents = [];
       this.progress = true;
-      console.log("storeThreadKey:" + this.$store.state.threadKey);
+      // console.log("storeThreadKey:" + this.$store.state.threadKey);
       let url =
         "https://t9f823.deta.dev/api/v1/threads/" +
         this.$store.state.threadKey +
@@ -86,7 +86,7 @@ export default {
           }
         })
         .then(response => {
-          console.log(response.data);
+          // console.log(response.data);
           response.data.forEach(e => {
             const date = new Date(0);
             date.setUTCSeconds(e.created_at);
@@ -120,11 +120,11 @@ export default {
           }
         )
         .then(response => {
-          console.log(response.data);
+          // console.log(response.data);
           this.listPosts();
         })
         .catch(error => {
-          console.log(error.response);
+          // console.log(error.response);
         });
     },
     async deletePosts(post_key) {
@@ -150,7 +150,7 @@ export default {
         });
     },
     setThreadKey() {
-      console.log("ThreadKey:" + this.thread_key);
+      // console.log("ThreadKey:" + this.thread_key);
       this.$store.commit("setThreadKey", "");
     },
     dateFormat(date, format) {
