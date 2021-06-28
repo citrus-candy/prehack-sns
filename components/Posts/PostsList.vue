@@ -4,11 +4,26 @@
       <v-card height="75vh" width="50vw" dark>
         <v-list-item v-for="content in contents" :key="content.key">
           <v-list-item-content>
-            <v-list-item-subtitle>{{ content[0] }}</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ content[1] }}</v-list-item-subtitle>
             <v-list-item-title>
-              <div>{{ content[1] }}</div>
+              <div>
+                {{ content[3] }}
+                <v-btn
+                  v-show="isLogin && content[0] == userKey"
+                  class="btnDelete"
+                  icon
+                  color="red"
+                  @click="deletePosts(content[2])"
+                  absolute
+                  right
+                  top
+                  :loading="btnLoading"
+                >
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </div>
               <v-list-item-subtitle class="itemDate">
-                {{ content[2] }}
+                {{ content[4] }}
               </v-list-item-subtitle>
             </v-list-item-title>
             <v-divider></v-divider>
@@ -32,6 +47,9 @@
       </v-btn>
       <create-post-dialog @list-posts="listPosts" />
     </div>
+    <v-snackbar v-model="snackDelete" absolute bottom>
+      投稿を削除しました
+    </v-snackbar>
   </v-row>
 </template>
 
@@ -44,9 +62,9 @@ export default {
   data: () => ({
     contents: [],
     dialog: false,
-    post_content: "",
-    btn_loading: false,
-    progress: true
+    progress: true,
+    snackDelete: false,
+    btnLoading: false
   }),
   mounted() {
     this.listPosts();
@@ -68,17 +86,20 @@ export default {
           }
         })
         .then(response => {
+          console.log(response.data);
           response.data.forEach(e => {
             const date = new Date(0);
             date.setUTCSeconds(e.created_at);
             this.contents.push([
+              e.author.key,
               e.author.name,
+              e.key,
               e.content,
               this.dateFormat(date, "YYYY/MM/DD HH:MM:SS")
             ]);
           });
           this.progress = false;
-          console.log(this.contents);
+          // console.log(this.contents);
         })
         .catch(error => {
           console.log(error);
@@ -106,6 +127,28 @@ export default {
           console.log(error.response);
         });
     },
+    async deletePosts(post_key) {
+      let url = "https://t9f823.deta.dev/api/v1/posts/" + post_key;
+      let Authorization = `Bearer ${this.$store.state.token}`;
+      this.btnLoading = true;
+      // console.log(post_key, Authorization);
+      axios
+        .delete(url, {
+          data: {
+            post_key: post_key
+          },
+          headers: { "jwt-token": Authorization }
+        })
+        .then(response => {
+          // console.log(response.data);
+          this.listPosts();
+          this.snackDelete = true;
+          this.btnLoading = false;
+        })
+        .catch(error => {
+          console.log(error.response);
+        });
+    },
     setThreadKey() {
       console.log("ThreadKey:" + this.thread_key);
       this.$store.commit("setThreadKey", "");
@@ -127,6 +170,9 @@ export default {
     },
     token() {
       return this.$store.state.token;
+    },
+    userKey() {
+      return this.$store.state.userKey;
     }
   }
 };
@@ -150,6 +196,9 @@ export default {
   position: absolute;
   top: 30px;
   left: 30px;
+}
+.btnDelete {
+  top: 0px;
 }
 .v-btn {
   margin: 0px 5px;
