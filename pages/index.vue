@@ -4,7 +4,7 @@
       <ThreadTable />
     </v-col>
     <v-col v-else>
-      <PostsList />
+      <Posts />
     </v-col>
   </v-row>
 </template>
