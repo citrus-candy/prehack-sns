@@ -41,7 +41,8 @@ module.exports = {
         download: true,
         inject: true
       }
-    ]
+    ],
+    "nuxt-animejs"
   ],
   components: true,
   modules: ["@nuxtjs/axios"],
