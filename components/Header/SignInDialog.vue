@@ -15,7 +15,7 @@
         <v-icon left>mdi-logout</v-icon>
         ログアウト
       </v-btn>
-      <v-btn class="userName" text>
+      <v-btn v-show="isLogin" class="userName" text>
         {{ userName }}
       </v-btn>
       <v-snackbar class="snack" v-model="snackLogin" absolute right>
@@ -53,6 +53,7 @@
             @click="signin()"
             color="success"
             :loading="btnLoading"
+            :disabled="email == '' || password == ''"
           >
             ログイン
           </v-btn>

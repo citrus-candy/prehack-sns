@@ -59,6 +59,7 @@
             @click="signup()"
             color="primary"
             :loading="btnLoading"
+            :disabled="name == '' || email == '' || password == ''"
           >
             サインアップ
           </v-btn>

@@ -32,6 +32,7 @@
             @click="createThread()"
             color="primary"
             :loading="btnLoading"
+            :disabled="name == ''"
           >
             作成
           </v-btn>

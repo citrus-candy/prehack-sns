@@ -37,6 +37,7 @@
             @click="createPost()"
             color="primary"
             :loading="btnLoading"
+            :disabled="content == ''"
           >
             投稿
           </v-btn>
