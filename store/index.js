@@ -3,7 +3,9 @@ export const state = () => ({
   userKey: "",
   userName: "",
   token: "",
-  threadKey: ""
+  threadKey: "",
+  postStatus: "",
+  vantaEffect: "rings"
 });
 
 export const mutations = {
@@ -21,5 +23,10 @@ export const mutations = {
   },
   setThreadKey(state, threadKey) {
     state.threadKey = threadKey;
+  },
+  setPostStatus(state, postStatus) {
+    if (postStatus == "list") state.vantaEffect = "rings";
+    if (postStatus == "timeline") state.vantaEffect = "waves";
+    state.postStatus = postStatus;
   }
 };

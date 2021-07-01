@@ -11,6 +11,9 @@
 
 <script>
 export default {
+  mounted() {
+    this.$store.commit("setPostStatus", "list");
+  },
   computed: {
     threadKey() {
       return this.$store.state.threadKey;
@@ -18,10 +21,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.img {
-  width: 54vw;
-  margin: auto;
-}
-</style>

@@ -8,6 +8,16 @@
         :progress="progress"
         :btnLoading="btnLoading"
         @delete-post="deletePost"
+        v-show="postStatus == 'list'"
+      />
+      <PostsTimeline
+        :contents="contents"
+        :isLogin="isLogin"
+        :userKey="userKey"
+        :progress="progress"
+        :btnLoading="btnLoading"
+        @delete-post="deletePost"
+        v-show="postStatus == 'timeline'"
       />
     </v-col>
     <v-row class="btnContainer" id="left">
@@ -27,13 +37,13 @@
     </v-row>
     <v-row class="btnContainer flex-column" id="right">
       <v-col>
-        <v-btn fab color="cyan" @click="setThreadKey()">
-          <v-icon>mdi-chevron-left</v-icon>
+        <v-btn fab color="orange" @click="setPostStatus('list')">
+          <v-icon>mdi-card-text-outline</v-icon>
         </v-btn>
       </v-col>
       <v-col>
-        <v-btn fab color="primary" @click="listPosts()">
-          <v-icon>mdi-sync</v-icon>
+        <v-btn fab color="pink" @click="setPostStatus('timeline')">
+          <v-icon>mdi-timeline</v-icon>
         </v-btn>
       </v-col>
     </v-row>
@@ -139,10 +149,6 @@ export default {
           console.log(error.response);
         });
     },
-    setThreadKey() {
-      // console.log("ThreadKey:" + this.thread_key);
-      this.$store.commit("setThreadKey", "");
-    },
     dateFormat(date, format) {
       format = format.replace(/YYYY/, date.getFullYear());
       format = format.replace(/MM/, date.getMonth() + 1);
@@ -152,6 +158,12 @@ export default {
       format = format.replace(/SS/, ("0" + date.getSeconds()).slice(-2));
 
       return format;
+    },
+    setThreadKey() {
+      this.$store.commit("setThreadKey", "");
+    },
+    setPostStatus(status) {
+      this.$store.commit("setPostStatus", status);
     }
   },
   computed: {
@@ -163,6 +175,9 @@ export default {
     },
     userKey() {
       return this.$store.state.userKey;
+    },
+    postStatus() {
+      return this.$store.state.postStatus;
     }
   }
 };
@@ -170,8 +185,8 @@ export default {
 
 <style scoped>
 .btnContainer {
-  top: 30px;
-  position: absolute;
+  top: 80px;
+  position: fixed;
 }
 .btnContainer#left {
   left: 30px;

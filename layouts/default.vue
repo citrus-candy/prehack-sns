@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-vanta effect="rings" :options="options" />
+    <v-vanta :key="vantaEffect" :effect="vantaEffect" :options="options" />
     <Header />
     <v-main>
       <v-container>
@@ -27,6 +27,11 @@ export default {
         scaleMobile: 1.0
       }
     };
+  },
+  computed: {
+    vantaEffect() {
+      return this.$store.state.vantaEffect;
+    }
   }
 };
 </script>
@@ -45,9 +50,10 @@ html {
 
 #app {
   background-color: rgb(32, 36, 40);
-  max-height: 100vh;
+  /* max-height: 100vh; */
   font-family: "cyrillic";
   overflow: hidden;
+  background-attachment: fixed;
 }
 
 .container {
@@ -58,5 +64,6 @@ html {
 
 .vanta-canvas {
   height: 100vh !important;
+  position: fixed !important;
 }
 </style>

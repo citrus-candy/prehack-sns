@@ -92,8 +92,8 @@ export default {
   opacity: 0;
 }
 .btnContainer {
-  position: absolute;
-  top: 30px;
+  position: fixed;
+  top: 80px;
   left: 30px;
 }
 .v-btn {
