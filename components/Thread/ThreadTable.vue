@@ -21,12 +21,16 @@
     <transition name="fade">
       <div class="bg" v-show="progress"></div>
     </transition>
-    <div class="btnContainer">
-      <v-btn fab color="primary" @click="listThread()">
-        <v-icon>mdi-sync</v-icon>
-      </v-btn>
-      <create-thread-dialog @list-thread="listThread" />
-    </div>
+    <v-row class="btnContainer">
+      <v-col>
+        <v-btn fab color="primary" @click="listThread()">
+          <v-icon>mdi-sync</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col>
+        <create-thread-dialog @list-thread="listThread" />
+      </v-col>
+    </v-row>
   </v-row>
 </template>
 
@@ -93,7 +97,6 @@ export default {
   left: 30px;
 }
 .v-btn {
-  margin: 0px 5px;
   opacity: 0.7;
   transition-property: opacity;
 }

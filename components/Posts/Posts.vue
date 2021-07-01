@@ -10,15 +10,33 @@
         @delete-post="deletePost"
       />
     </v-col>
-    <div class="btnContainer">
-      <v-btn fab color="cyan" @click="setThreadKey()">
-        <v-icon>mdi-chevron-left</v-icon>
-      </v-btn>
-      <v-btn fab color="primary" @click="listPosts()">
-        <v-icon>mdi-sync</v-icon>
-      </v-btn>
-      <create-post-dialog @list-posts="listPosts" />
-    </div>
+    <v-row class="btnContainer" id="left">
+      <v-col>
+        <v-btn fab color="cyan" @click="setThreadKey()">
+          <v-icon>mdi-chevron-left</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col>
+        <v-btn fab color="primary" @click="listPosts()">
+          <v-icon>mdi-sync</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col>
+        <create-post-dialog @list-posts="listPosts" />
+      </v-col>
+    </v-row>
+    <v-row class="btnContainer flex-column" id="right">
+      <v-col>
+        <v-btn fab color="cyan" @click="setThreadKey()">
+          <v-icon>mdi-chevron-left</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col>
+        <v-btn fab color="primary" @click="listPosts()">
+          <v-icon>mdi-sync</v-icon>
+        </v-btn>
+      </v-col>
+    </v-row>
     <v-snackbar v-model="snackDelete" absolute bottom>
       投稿を削除しました
     </v-snackbar>
@@ -152,12 +170,16 @@ export default {
 
 <style scoped>
 .btnContainer {
-  position: absolute;
   top: 30px;
+  position: absolute;
+}
+.btnContainer#left {
   left: 30px;
 }
+.btnContainer#right {
+  right: 30px;
+}
 .v-btn {
-  margin: 0px 5px;
   opacity: 0.7;
   transition-property: opacity;
 }
