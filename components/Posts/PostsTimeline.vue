@@ -59,7 +59,7 @@ export default {
   display: flex;
 }
 .btnDelete {
-  top: 0px;
+  top: 5px;
 }
 .circular {
   height: inherit;
