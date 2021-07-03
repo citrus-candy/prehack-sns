@@ -67,18 +67,4 @@ export default {
 .itemDate {
   text-align: right;
 }
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #fff;
-  border: none;
-  border-radius: 10px;
-  box-shadow: inset 0 0 2px #777;
-}
-::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 10px;
-  box-shadow: none;
-}
 </style>

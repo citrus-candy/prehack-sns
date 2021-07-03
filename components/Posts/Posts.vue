@@ -19,6 +19,15 @@
         @delete-post="deletePost"
         v-show="postStatus == 'timeline'"
       />
+      <PostsComment
+        :contents="contents"
+        :isLogin="isLogin"
+        :userKey="userKey"
+        :progress="progress"
+        :btnLoading="btnLoading"
+        @delete-post="deletePost"
+        v-show="postStatus == 'comment'"
+      />
     </v-col>
     <v-row class="btnContainer" id="left">
       <v-col>
@@ -44,6 +53,11 @@
       <v-col>
         <v-btn fab color="pink" @click="setPostStatus('timeline')">
           <v-icon>mdi-timeline</v-icon>
+        </v-btn>
+      </v-col>
+      <v-col>
+        <v-btn fab color="white" @click="setPostStatus('comment')">
+          <v-icon>mdi-chat-processing</v-icon>
         </v-btn>
       </v-col>
     </v-row>

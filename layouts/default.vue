@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <v-vanta :key="vantaEffect" :effect="vantaEffect" :options="options" />
+    <!-- <v-vanta :key="vantaEffect" :effect="vantaEffect" :options="options" /> -->
+    <v-vanta effect="rings" :options="options" />
     <Header />
     <v-main>
       <v-container>
