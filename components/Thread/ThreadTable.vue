@@ -7,13 +7,12 @@
         :thread_key="result.key"
       />
     </v-col>
-    <v-col>
+    <v-col v-show="progress">
       <v-progress-circular
         class="circular"
         size="270"
         indeterminate
         color="white"
-        v-show="progress"
       >
         GET => Kashiwa Onigiri 🍙
       </v-progress-circular>
