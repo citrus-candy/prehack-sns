@@ -4,15 +4,17 @@
     <v-spacer></v-spacer>
     <sign-in-dialog />
     <sign-up-dialog />
+    <vantajs-dialog />
   </v-app-bar>
 </template>
 
 <script>
 import SignInDialog from "./SignInDialog.vue";
 import SignUpDialog from "./SignUpDialog.vue";
+import VantajsDialog from "./VantajsDialog.vue";
 
 export default {
-  components: { SignInDialog, SignUpDialog },
+  components: { SignInDialog, SignUpDialog, VantajsDialog },
   data: () => ({
     loading: false
   }),
