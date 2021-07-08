@@ -53,7 +53,12 @@ export default {
       let url = "https://t9f823.deta.dev/api/v1/threads";
       this.progress = true;
       await axios
-        .get(url)
+        .get(url, {
+          params: {
+            limit: 99,
+            page: 1
+          }
+        })
         .then(response => {
           this.results = response.data;
           this.progress = false;
